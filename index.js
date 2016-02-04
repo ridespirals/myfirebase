@@ -24,6 +24,22 @@ function getName(authData) {
 	}
 }
 
+function createAuthUser(firebase, email, password){
+	firebase.createUser({
+		password: password,
+		email: email,
+	}, function(err, userData) {
+		if(err) {
+			console.log("Error creating user: ", err);
+		} else {
+			console.log("successfully created user: ", prettyjson.render(userData));
+		}
+	});;
+
+}
+
 ref.child('people').on('value', function(snapshot) {
 	console.log(prettyjson.render(snapshot.val()));
 });
+
+//createAuthUser(ref, 'motdidr@gmail.com', 'password');
