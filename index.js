@@ -1,4 +1,5 @@
 var Firebase = require('firebase');
+var prettyjson = require('prettyjson');
 
 var isNewUser = true;
 var ref = new Firebase("https://glowing-heat-963.firebaseio.com/");
@@ -22,3 +23,7 @@ function getName(authData) {
 			return authData.facebook.displayName;
 	}
 }
+
+ref.child('people').on('value', function(snapshot) {
+	console.log(prettyjson.render(snapshot.val()));
+});
